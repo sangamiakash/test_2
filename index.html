@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HelperHub - Remote Tech Support Companion</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header class="app-header">
+    <h1>HelperHub</h1>
+    <p class="tagline">A co-pilot for giving tech help from afar</p>
+  </header>
+
+  <main class="app-grid">
+    <section class="panel session" aria-labelledby="session-heading">
+      <div class="panel-header">
+        <h2 id="session-heading">Live Session</h2>
+        <button class="primary" id="start-session">Start new session</button>
+      </div>
+      <div class="session-info" role="status" aria-live="polite">
+        <p class="session-status">No active session</p>
+      </div>
+      <form class="session-form" aria-label="Session setup">
+        <label>
+          Helper name
+          <input type="text" id="helper-name" placeholder="Your name" />
+        </label>
+        <label>
+          Person you're helping
+          <input type="text" id="helpee-name" placeholder="e.g. Auntie Mary" />
+        </label>
+        <label>
+          Main goal
+          <input type="text" id="session-goal" placeholder="Book covid shot" />
+        </label>
+        <label>
+          Meeting link
+          <input type="url" id="meeting-link" placeholder="https://zoom.us/..." />
+        </label>
+      </form>
+      <div class="quick-actions" aria-label="Quick actions">
+        <h3>Quick actions</h3>
+        <div class="actions-grid">
+          <button class="chip" data-action="send-instructions">Send prep checklist</button>
+          <button class="chip" data-action="share-screen">Request screen share</button>
+          <button class="chip" data-action="record-session">Record walkthrough</button>
+          <button class="chip" data-action="follow-up">Schedule follow-up</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel steps" aria-labelledby="steps-heading">
+      <div class="panel-header">
+        <h2 id="steps-heading">Guided Steps</h2>
+        <button class="secondary" id="clear-steps">Clear all</button>
+      </div>
+      <form id="step-form" class="step-form" aria-label="Add a step">
+        <label for="step-input" class="visually-hidden">Add a step</label>
+        <input
+          id="step-input"
+          type="text"
+          placeholder="e.g. Ask Mary to open Chrome"
+          aria-describedby="step-helper"
+          required
+        />
+        <button class="primary" type="submit">Add step</button>
+      </form>
+      <p id="step-helper" class="helper-text">
+        Keep instructions short and action-oriented. Check off steps as Mary completes them.
+      </p>
+      <ol class="step-list" aria-live="polite"></ol>
+    </section>
+
+    <section class="panel resources" aria-labelledby="resources-heading">
+      <h2 id="resources-heading">Resources &amp; Snippets</h2>
+      <form id="resource-form" class="resource-form" aria-label="Add resource">
+        <input type="text" id="resource-title" placeholder="Resource title" required />
+        <input type="url" id="resource-link" placeholder="https://" required />
+        <button class="primary" type="submit">Save</button>
+      </form>
+      <ul class="resource-list" aria-live="polite"></ul>
+      <div class="suggested-resources">
+        <h3>Suggestions</h3>
+        <ul>
+          <li><button class="link-button" data-url="https://support.zoom.us/">Zoom Support Center</button></li>
+          <li><button class="link-button" data-url="https://www.youtube.com/watch?v=dj3Ymx0nbuk">How to share your screen on Zoom</button></li>
+          <li><button class="link-button" data-url="https://calendar.google.com/">Schedule follow-up call</button></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel notes" aria-labelledby="notes-heading">
+      <div class="panel-header">
+        <h2 id="notes-heading">Notes &amp; Recap</h2>
+        <button class="secondary" id="export-notes">Export</button>
+      </div>
+      <textarea
+        id="notes-area"
+        rows="10"
+        placeholder="Capture what worked, what confused Mary, and follow-up items..."
+        aria-label="Session notes"
+      ></textarea>
+      <div class="recap" role="log" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Made for the "Helping Auntie Mary" design sprint. Built with empathy, clarity, and collaboration in mind.</p>
+  </footer>
+
+  <template id="step-template">
+    <li class="step-item">
+      <label>
+        <input type="checkbox" />
+        <span class="step-text"></span>
+      </label>
+      <button class="icon-button remove-step" aria-label="Remove step">&times;</button>
+    </li>
+  </template>
+
+  <template id="resource-template">
+    <li class="resource-item">
+      <a class="resource-link" target="_blank" rel="noopener"></a>
+      <button class="icon-button remove-resource" aria-label="Remove resource">&times;</button>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
